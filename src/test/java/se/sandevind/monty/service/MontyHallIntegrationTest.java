@@ -37,7 +37,7 @@ public class MontyHallIntegrationTest {
 
         assertThat(percentage, is(both(greaterThan(65d)).and(lessThan(70d))));
         String percentageStr = getPercentageStr(percentage);
-        logger.log(Level.INFO, "Test run with Swap - Successes:  " + success + " percentage: " + percentageStr);
+        logger.log(Level.INFO, "Changing lakes - Successes:  " + success + " percentage: " + percentageStr);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class MontyHallIntegrationTest {
 
         assertThat(percentage, is(both(greaterThan(30d)).and(lessThan(35d))));
         String percentageStr = getPercentageStr(percentage);
-        logger.log(Level.INFO, "Test run with Stay - Successes:  " + success + " percentage: " + percentageStr);
+        logger.log(Level.INFO, "Staying with first lake - Successes:  " + success + " percentage: " + percentageStr);
     }
 
     private int restCall(int success, String url) {

@@ -15,8 +15,8 @@ public class GameService {
         if (choice == StayOrSwap.stay) {
             return listOfThree.get(selected -1);
         }
-        int swapDoor = 6 - (getFirstEmpty(selected, listOfThree) + 1) - selected - 1;
-        return listOfThree.get(swapDoor);
+        int swap = 6 - (getFirstEmpty(selected, listOfThree) + 1) - selected - 1;
+        return listOfThree.get(swap);
     }
 
     protected List<Boolean> getListOfThreeWithOneRandomTrue() {
