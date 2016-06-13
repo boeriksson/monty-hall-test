@@ -1,6 +1,10 @@
 package se.sandevind.monty;
 
 public enum StayOrSwap {
-    stay,
-    swap
+    STAY,
+    SWAP;
+
+    public static StayOrSwap getEnum(String value) {
+        return valueOf(value.toUpperCase());
+    }
 }

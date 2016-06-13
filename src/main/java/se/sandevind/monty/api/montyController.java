@@ -9,14 +9,13 @@ import se.sandevind.monty.StayOrSwap;
 import se.sandevind.monty.service.GameService;
 
 @RestController
-public class montyController {
+public class MontyController {
 
     @Autowired
     GameService gameService;
 
-
-    @RequestMapping(value="/run", method= RequestMethod.GET)
-    public boolean runGame(@RequestParam("door") int door, @RequestParam("choice") StayOrSwap choice) {
-        return gameService.run(door, choice);
+    @RequestMapping(value="/run", method = RequestMethod.GET)
+    public boolean runGame(@RequestParam("lake") int lake, @RequestParam("choice") String choice) {
+        return gameService.run(lake, StayOrSwap.getEnum(choice));
     }
 }

@@ -9,24 +9,31 @@ import java.util.Random;
 
 @Service
 public class GameService {
+    private Random randomGen = new Random();
 
     public boolean run(int selected, StayOrSwap choice) {
-        List<Boolean> listOfThree = getListOfThreeWithOneRandomTrue();
-        if (choice == StayOrSwap.stay) {
-            return listOfThree.get(selected -1);
+        if (selected < 1 || selected > 3) {
+            throw new IllegalArgumentException("Selected lake is out of range: " + selected);
         }
-        int swap = 6 - (getFirstEmpty(selected, listOfThree) + 1) - selected - 1;
-        return listOfThree.get(swap);
+        List<Boolean> listOfThreeLakes = getListOfThreeLakesWithOneRandomNessie();
+        if (choice == StayOrSwap.STAY) {
+            return listOfThreeLakes.get(selected -1);
+        }
+        return getSwapLake(selected, listOfThreeLakes);
     }
 
-    protected List<Boolean> getListOfThreeWithOneRandomTrue() {
-        Random randomGen = new Random();
-        List<Boolean> listOfThree = Arrays.asList(false, false, false);
-        listOfThree.set(randomGen.nextInt(3), true);
-        return listOfThree;
+    private Boolean getSwapLake(int selected, List<Boolean> listOfThreeLakes) {
+        int swapLakeNo =  6 - (getFirstEmptyNonSelectedLake(selected, listOfThreeLakes) + 1) - selected - 1;
+        return listOfThreeLakes.get(swapLakeNo);
     }
 
-    protected int getFirstEmpty(int selected, List<Boolean> listOfThree) {
+    List<Boolean> getListOfThreeLakesWithOneRandomNessie() {
+        List<Boolean> listOfThreeLakes = Arrays.asList(false, false, false);
+        listOfThreeLakes.set(randomGen.nextInt(3), true);
+        return listOfThreeLakes;
+    }
+
+    int getFirstEmptyNonSelectedLake(int selected, List<Boolean> listOfThree) {
         int ix = 0;
         for (Boolean entry : listOfThree) {
             if (!entry && ix != selected -1) {
